@@ -8,7 +8,7 @@ CSG generate(){
 	
 	// The variable that stores the current size of this vitamin
 	StringParameter size = new StringParameter(	type+" Default",args.get(0),Vitamins.listVitaminSizes(type))
-	HashMap<String,Object> measurments = Vitamins.getConfiguration( type,size.getStrValue())
+	HashMap<String,Object> measurments = Vitamins.getConfiguration( type,args[0])
 
 	def collarLengthValue = measurments.collarLength
 	def shaftDSectionDiameterValue = measurments.shaftDSectionDiameter
@@ -32,10 +32,15 @@ CSG generate(){
 	println "Measurment massKgValue =  "+massKgValue
 	println "Measurment lengthValue =  "+lengthValue
 	println "Measurment shaftDiameterValue =  "+shaftDiameterValue
+
+	LengthParameter collarOffset = new LengthParameter("collar offset", 0, [0, lengthValue - collarLengthValue])
 	
-	CSG part = new Cube(20).toCSG()
-	return part
+	CSG shaft = Vitamins.get("dShaft", args[0])
+	CSG collar = new Cylinder(collarDiameterValue, collarDiameterValue, collarLengthValue, 30).toCSG().movez(collarOffset.getMM())
+	CSG assembly = shaft.union(collar)
+	return assembly
 		.setParameter(size)
+		.setParameter(collarOffset)
 		.setRegenerate({generate()})
 }
 
