@@ -16,7 +16,7 @@ CSG generate(){
 	def sourceValue = measurments.source
 	def massCentroidZValue = measurments.massCentroidZ
 	def massKgValue = measurments.massKg
-	def shaftLengthValue = measurments.shaftLength
+	def lengthValue = measurments.length
 	def shaftDiameterValue = measurments.shaftDiameter
 	println "Measurment collarLengthValue =  "+collarLengthValue
 	println "Measurment shaftDSectionDiameterValue =  "+shaftDSectionDiameterValue
@@ -27,7 +27,7 @@ CSG generate(){
 	println "Measurment sourceValue =  "+sourceValue
 	println "Measurment massCentroidZValue =  "+massCentroidZValue
 	println "Measurment massKgValue =  "+massKgValue
-	println "Measurment shaftLengthValue =  "+shaftLengthValue
+	println "Measurment lengthValue =  "+lengthValue
 	println "Measurment shaftDiameterValue =  "+shaftDiameterValue
 	// Stub of a CAD object
 	CSG part = new Cube().toCSG()
