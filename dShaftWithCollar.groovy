@@ -1,8 +1,11 @@
 import eu.mihosoft.vrl.v3d.parametrics.*;
+
 CSG generate(){
 	String type= "dShaftWithCollar"
+	
 	if(args==null)
-		args=["5mm_dShaft"]
+		args=["5mm"]
+	
 	// The variable that stores the current size of this vitamin
 	StringParameter size = new StringParameter(	type+" Default",args.get(0),Vitamins.listVitaminSizes(type))
 	HashMap<String,Object> measurments = Vitamins.getConfiguration( type,size.getStrValue())
@@ -29,10 +32,11 @@ CSG generate(){
 	println "Measurment massKgValue =  "+massKgValue
 	println "Measurment lengthValue =  "+lengthValue
 	println "Measurment shaftDiameterValue =  "+shaftDiameterValue
-	// Stub of a CAD object
-	CSG part = new Cube().toCSG()
+	
+	CSG part = new Cube(20).toCSG()
 	return part
 		.setParameter(size)
 		.setRegenerate({generate()})
 }
-return generate() 
+
+return generate()
